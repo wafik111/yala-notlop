@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: one
+  ends_at: 2019-02-22 18:40:44
+  resturant: MyString
+  menu: 
+  type: 1
+  status: 1
+
+two:
+  user: two
+  ends_at: 2019-02-22 18:40:44
+  resturant: MyString
+  menu: 
+  type: 1
+  status: 1

@@ -1,0 +1,47 @@
+<%= form_for [@user,@order] do |f| %>
+  <% if order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name, "For" %>
+    <select name="order[name]" id="order_name">
+      <option value="breakfast">BreakFast</option>
+      <option value="lunch">Lunch</option>
+
+      <option value="dinner">Dinner</option>
+    </select>
+
+  </div>
+
+  <div class="field">
+    <%= f.label :restaurant %>
+    <%= f.text_field :restaurant %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_name , data: { autocomplete_source: users_path} %>
+  </div>
+  <div class="field">
+    <ul id="added">
+
+    </ul>
+
+</div>
+<div class="field">
+  <%= f.file_field :avatar %>
+</div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

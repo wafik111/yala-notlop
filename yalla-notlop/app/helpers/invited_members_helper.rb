@@ -1,0 +1,2 @@
+module InvitedMembersHelper
+end

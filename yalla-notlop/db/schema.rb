@@ -10,7 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_16_160401) do
+ActiveRecord::Schema.define(version: 2019_02_22_180753) do
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "invited_members", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_invited_members_on_order_id"
+    t.index ["user_id"], name: "index_invited_members_on_user_id"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_members_on_group_id"
+    t.index ["user_id"], name: "index_members_on_user_id"
+  end
+
+  create_table "order_informations", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "user_id"
+    t.string "item_name"
+    t.float "item_price"
+    t.integer "amount"
+    t.string "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_informations_on_order_id"
+    t.index ["user_id"], name: "index_order_informations_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id"
+    t.datetime "ends_at"
+    t.string "resturant"
+    t.string "menu_file_name"
+    t.string "menu_content_type"
+    t.integer "menu_file_size"
+    t.datetime "menu_updated_at"
+    t.integer "meal"
+    t.integer "status"
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
