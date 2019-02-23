@@ -22,7 +22,7 @@
 <% end %>
   </tbody>
 </table>
-
+<%= link_to "menu", @order.menu.url %><br>
 <%= link_to "#{@order.invited_members.count} friends invited, click to view", order_invited_path(@order) %>
 <br>
 <%= link_to "#{@order.order_informations.select(:user_id).distinct.count} friends joined, click to view", order_joined_path(@order) %>

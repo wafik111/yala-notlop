@@ -13,8 +13,9 @@ $(document).ready(function(){
                 dataType: "json",
                 success: (data) => {
                     let usersBox = $("#invited-people-list");
+                    console.log(usersIDs.toString());
                     for(user of data){
-                        console.log(usersIDs);
+                        //console.log(usersIDs);
 
                         if(usersIDs.includes(user.id))
                             continue;
@@ -32,6 +33,7 @@ $(document).ready(function(){
                         usersBox.append(userBox);
                         $(this).val("");
                     }
+                    $("#order_invited_ids").val(usersIDs.toString());
                 }
             });
 
@@ -40,11 +42,10 @@ $(document).ready(function(){
 
     $("#invited-people-list").on('click', 'button', function(){
         usersIDs.splice(usersIDs.indexOf($(this).attr("id")), 1);
-        console.log(usersIDs);
-
+        $("#order_invited_ids").val(usersIDs.toString());
         $(this).parent().parent().parent().remove();
     });
-    $("#order").submit(function(e){
+/*     $("#order").submit(function(e){
         e.preventDefault();
         let url = $(this).attr("action");
         let data = $(this).serialize()+usersIDs;
@@ -56,5 +57,5 @@ $(document).ready(function(){
         });
         //console.log($(this).serialize()+usersIDs);
 
-    })
+    }) */
 });

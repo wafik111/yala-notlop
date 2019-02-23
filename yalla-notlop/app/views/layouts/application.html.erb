@@ -4,29 +4,67 @@
     <title>YallaNotlop</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <style>
+
+.dropdown-menu{
+  top: 60px;
+  right: 0px;
+  left: unset;
+  width: 460px;
+  box-shadow: 0px 5px 7px -1px #c1c1c1;
+  padding-bottom: 0px;
+  padding: 0px;
+}
+.dropdown-menu:before{
+  content: "";
+  position: absolute;
+  top: -20px;
+  right: 12px;
+  border:10px solid #343A40;
+  border-color: transparent transparent #343A40 transparent;
+}
+.head{
+  padding:5px 15px;
+  border-radius: 3px 3px 0px 0px;
+}
+.footer{
+  padding:5px 15px;
+  border-radius: 0px 0px 3px 3px; 
+}
+.notification-box{
+  padding: 10px 0px; 
+}
+.bg-gray{
+  background-color: #eee;
+}
+@media (max-width: 640px) {
+    .dropdown-menu{
+      top: 50px;
+      left: -16px;  
+      width: 290px;
+    } 
+    .nav{
+      display: block;
+    }
+    .nav .nav-item,.nav .nav-item a{
+      padding-left: 0px;
+    }
+    .message{
+      font-size: 13px;
+    }
+}
+i.fa-bell{
+  color: #3f3f53;
+}
+</style>
   </head>
 
   <body>
       <div class="container">
-        <p class="navbar-text pull-right">
-        <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.email %></strong>.
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-        <% end %>
-          <%= link_to "Groups", groups_path, :class => 'navbar-link'  %>
-          <%= link_to "Orders", orders_path, :class => 'navbar-link'  %>
-
-      </p>
-        <% if notice %>
-        <p class="alert alert-success"><%= notice %></p>
-      <% end %>
+        <%= render partial: "/layouts/navbar" %>
       <% if alert %>
         <p class="alert alert-danger"><%= alert %></p>
       <% end %>

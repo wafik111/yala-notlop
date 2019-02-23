@@ -11,6 +11,8 @@
       </ul>
     </div>
   <% end %>
+      
+      <%= f.hidden_field :invited_ids %>
     <div class="form-group">
       <%= f.label :name %>
       <%= f.text_field :name, class:"form-control" %>
@@ -23,6 +25,7 @@
           <option value="dinner">Dinner</option>
         </select>
     </div>
+
     <div class="form-group">
       <%= f.label :resturant %>
       <%= f.text_field :resturant, class:"form-control" %>

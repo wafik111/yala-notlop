@@ -28,7 +28,7 @@
         <td><%= order.invited_members.count %></td>
         <td><%= order.order_informations.select(:user_id).distinct.count %></td>
         <% unless order.finished? %>
-          <td><%= link_to 'finish', edit_order_path(order.id) %></td>
+          <td><%= link_to 'edit', edit_order_path(order.id), class: "btn btn-primary" %></td>
           <td><%= link_to 'Cancel', order_path(order.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
         <% end %>
       </tr>
