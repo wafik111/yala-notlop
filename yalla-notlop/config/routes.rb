@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   get 'welcome/index'
   resources :users, only: [:show]
 
+  post "/orders/invite.json", to: "invited_members#invite"
+
   resources :orders do
     get "/joined/", to: "order_informations#index"
     post"/add/", to: "order_informations#create"

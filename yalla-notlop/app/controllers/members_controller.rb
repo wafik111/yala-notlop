@@ -1,13 +1,14 @@
 class MembersController < ApplicationController
     before_action :get_user, only: [:index, :create, :destroy]
     before_action :get_user_group, only: [:index, :create, :destroy]
+    skip_before_action :verify_authenticity_token
 
     def index
         unless @group
             render :json => [].to_json
         else
-            @members = @group.members.joins(:user).select(:name, :email)
-            render :json => @members.to_json(only: [:name, :email])
+            @members = @group.members.joins(:user).select(:user_id, :name, :email)
+            render :json => @members.to_json(only: [:user_id, :name, :email])
         end
     end
 

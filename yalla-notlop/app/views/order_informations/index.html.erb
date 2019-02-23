@@ -1,3 +1,4 @@
+<div class="row">
     <div class="row justify-content-center mb-4">
         <h3>Members Joined in <%= @order.name %></h3>
     </div>
@@ -10,10 +11,9 @@
                 </div>
                 <div class="col-5 p-0">
                     <%= link_to member.name, user_path(member.user_id), class: "font-weight-bold"%><br>
- 
                 </div>
             </div>
         </div>
     <% end %>
     </div>
-
+</div>

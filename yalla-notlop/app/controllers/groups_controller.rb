@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
     before_action :get_user, only: [:show, :index]
     before_action :get_user_groups, only: [:show, :index]
-
+    
     def index
         @group = Group.new
     end

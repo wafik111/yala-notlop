@@ -1,2 +1,26 @@
-<h1>Welcome#index</h1>
-<p>hello wafik </p>
+<div class="row">
+    <div class="col-6">
+        <%= link_to 'create order', new_order_path, class: "btn btn-success float-right mb-4 mr-4"%>
+        <h3>My Orders</h3>
+        
+            <% @orders.each do |order| %>
+                <div class="row mt-4">
+                    <% unless order.cancelled? %>
+                        <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>     
+                    <% end %>
+                </div>
+            <% end %>
+    </div>
+
+    <div class="col-6">
+        <h3>Friend's Activities</h3>
+        
+            <% @orders.each do |order| %>
+                <div class="row mt-4">
+                    <% unless order.cancelled? %>
+                        <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>     
+                    <% end %>
+                </div>
+            <% end %>
+    </div>
+</div>
