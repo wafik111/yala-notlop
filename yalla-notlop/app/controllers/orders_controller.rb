@@ -20,7 +20,7 @@ class OrdersController < ApplicationController
         @invited_peoples = params[:order][:invited_ids].split(",")
         @invited_peoples.each do |invited|
             @order.invited_members.create(user_id: invited)
-            @order.order_notifications.create(from: @user, to_id: invited)
+            @order.order_notifications.create(from: @user, to_id: invited, type: :invitation_pending)
         end
         redirect_to order_path @order
     end
