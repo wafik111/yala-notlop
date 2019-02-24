@@ -14,13 +14,15 @@ class OrdersController < ApplicationController
     def create
         @order = @user.orders.build(get_order_params)
         @order.status = :waiting
-        unless @order.save
-            redirect_to new_order_path
+        unless @order.save or @order.ends_at > Time.now
+            redirect_to new_order_path and return
         end
         @invited_peoples = params[:order][:invited_ids].split(",")
         @invited_peoples.each do |invited|
-            @order.invited_members.create(user_id: invited)
-            @order.order_notifications.create(from: @user, to_id: invited, type: :invitation_pending)
+            unless @order.invited_members.find_by(user_id: invited)
+                @order.invited_members.create(user_id: invited)
+                @order.order_notifications.create(from: @user, to_id: invited, type: :unread)
+            end
         end
         redirect_to order_path @order
     end
@@ -31,6 +33,9 @@ class OrdersController < ApplicationController
 
     def update
         @order = @user.orders.find_by(id: params[:id])
+        if get_order_params[:ends_at] >= Time.now
+            redirect_to edit_order_path and return
+        end
         @order.update(get_order_params) if @order.waiting?
         @invited_peoples = params[:order][:invited_ids].split(",")
         @invited_peoples.each do |invited|
