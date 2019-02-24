@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Gruops</h1>
+
+<%= render "form_group" %>
+
+<div class="row mt-4">
+    <div class="col-4 p-2">
+        <h3 class="mb-4">My Groups</h3>
+        <% @groups.each do |group| %>
+            <div class="group mb-4">
+                <%= link_to group.name, group_path(group), class: "p-1 mr-4 group-name"%>
+                <%= link_to 'edit', edit_group_path(group), class: "p-1 mr-4" %>
+                <%= link_to 'delete', group_path(group), method: :delete, class: "btn btn-danger p-1 mr-4", data: { confirm: 'Are you sure?' } %>
+                <br>
+            </div>
+        <% end %>
+    </div>
+    <div class="col-8 p-2">
+        <%= yield %>
+    </div>
+
+</div>
+

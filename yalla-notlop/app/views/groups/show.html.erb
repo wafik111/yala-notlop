@@ -1,0 +1,21 @@
+<%= render layout: "group_list" do %>
+    <div class="row justify-content-center">
+        <h3><%= @this_group.name %> members</h3>
+    </div>
+    <%= render "form_member" %>
+    <div class="row">
+    <% @members.each do |member| %>
+        <div class="m-1 col-5">
+            <div class="row">
+                <div class="col-4">
+                    <img src="" width="70px" height="80px">
+                </div>
+                <div class="col-5 p-0">
+                    <%= link_to member.name, user_path(member.user_id), class: "font-weight-bold"%><br>
+                    <%= link_to  "remove", group_member_path(member.group_id, member.user_id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %><br>
+                </div>
+            </div>
+        </div>
+    <% end %>
+    </div>
+<% end %>

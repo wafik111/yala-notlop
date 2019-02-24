@@ -1,0 +1,44 @@
+
+<%= form_with model: @order, local: true, id: "order" do |f| %>
+  <% if @order.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <ul>
+      <% @order.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :name, "For" %>
+        <select name="order[meal]" id="order_meal" class="form-control">
+          <option value="breakfast" selected>BreakFast</option>
+          <option value="lunch">Lunch</option>
+          <option value="dinner">Dinner</option>
+        </select>
+    </div>
+    <div class="form-group">
+      <%= f.label :resturant %>
+      <%= f.text_field :resturant, class:"form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :invite %><br />
+      <%= f.text_field :invitations , id: "invite-box", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.datetime_field :ends_at %>
+    </div>
+    <div class="form-group">
+      <%= f.file_field :menu %>
+    </div>
+    <div class="form-group">
+      <%= f.submit "add", class: "btn btn-primary" %>
+    </div>
+<% end %>
