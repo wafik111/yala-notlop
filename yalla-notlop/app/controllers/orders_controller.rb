@@ -21,7 +21,7 @@ class OrdersController < ApplicationController
         @invited_peoples.each do |invited|
             unless @order.invited_members.find_by(user_id: invited)
                 @order.invited_members.create(user_id: invited)
-                @order.order_notifications.create(from: @user, to_id: invited, type: :unread)
+                @order.order_notifications.create(from: @user, to_id: invited, status: :unread)
             end
         end
         redirect_to order_path @order

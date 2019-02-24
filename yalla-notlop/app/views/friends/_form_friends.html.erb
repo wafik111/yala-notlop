@@ -1,0 +1,12 @@
+<%= form_with url: friends_path, method: :post, local: true do |f| %>
+
+  
+    <div class="form-row">
+        <div class="col-9">
+        <%= f.text_field :name, class: "form-control", placeholder: "friend name" %>
+        </div>
+        <div class="col-3">
+        <%= f.submit "add", class: "btn btn-primary"%>
+        </div>
+    </div>
+<% end %>

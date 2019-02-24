@@ -1,0 +1,51 @@
+
+
+<%= render "form_friends" %>
+
+<h2 class="my-3">Friends</h2>
+<div class="row">
+<% @friends.each do |friend| %>
+    <div class="m-1 col-5">
+        <div class="row">
+            <div class="col-4">
+                <img src="" width="80px" height="80px" class="ml-4">
+            </div>
+            <div class="col-5 p-0">
+                <%= link_to friend.name, user_path(friend.id), class: "font-weight-bold"%><br>
+                <%= link_to  "unfriend", friend_path(friend.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %><br>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+<h2 class="my-3">Friends Requests</h2>
+<div class="row">
+<% @requested_friends.each do |friend| %>
+    <div class="m-1 col-5">
+        <div class="row">
+            <div class="col-4">
+                <img src="" width="70px" height="80px" class="ml-4">
+            </div>
+            <div class="col-5 p-0">
+                <%= link_to friend.name, user_path(friend.id), class: "font-weight-bold"%><br>
+                <%= link_to  "accept", friend_path(friend.id), method: :patch, class: "btn btn-danger" %><br>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
+<h2 class="my-3">Pending Requests</h2>
+<div class="row">
+<% @pending_friends.each do |friend| %>
+    <div class="m-1 col-5">
+        <div class="row">
+            <div class="col-4">
+                <img src="" width="70px" height="80px" class="ml-4">
+            </div>
+            <div class="col-5 p-0">
+                <%= link_to friend.name, user_path(friend.id), class: "font-weight-bold"%><br>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>

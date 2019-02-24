@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   resources :users, only: [:show]
 
   post "/orders/invite.json", to: "invited_members#invite"
-
+   
+  resources :friends, only: [:index, :create, :destroy, :update]
   resources :orders do
     get "/joined/", to: "order_informations#index"
     post"/add/", to: "order_informations#create"
