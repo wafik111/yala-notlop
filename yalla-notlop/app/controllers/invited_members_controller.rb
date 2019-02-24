@@ -8,7 +8,7 @@ class InvitedMembersController < ApplicationController
     #POST /orders/invite.json
     def invite
         @user = User.find_by(name: params[:name])
-        if @user
+        if @user and current_user.friends_with?(@user)
             render json: [@user].to_json(only: [:id, :email, :name]) and return
         end
         @group = current_user.groups.find_by(name: params[:name])
