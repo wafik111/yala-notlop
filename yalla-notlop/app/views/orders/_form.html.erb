@@ -31,10 +31,9 @@
       <%= f.text_field :resturant, class:"form-control" %>
     </div>
 
-    <div class="form-group">
       <%= f.label :invite %><br />
-      <%= f.text_field :invitations , id: "invite-box", class: "form-control" %>
-    </div>
+      <%= f.text_field :invitations , id: "invite-box", class: "form-control" %> 
+    <button class="btn btn-primary my-2" id="invite-btn">invite</button>
     <div class="form-group">
       <%= f.datetime_field :ends_at %>
     </div>

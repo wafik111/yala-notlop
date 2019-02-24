@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_23_210533) do
+ActiveRecord::Schema.define(version: 2019_02_24_054008) do
+
+  create_table "friendship_notifications", force: :cascade do |t|
+    t.integer "from_id"
+    t.integer "to_id"
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -49,6 +57,16 @@ ActiveRecord::Schema.define(version: 2019_02_23_210533) do
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_order_informations_on_order_id"
     t.index ["user_id"], name: "index_order_informations_on_user_id"
+  end
+
+  create_table "order_notifications", force: :cascade do |t|
+    t.integer "from_id"
+    t.integer "to_id"
+    t.integer "type"
+    t.integer "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_notifications_on_order_id"
   end
 
   create_table "orders", force: :cascade do |t|
