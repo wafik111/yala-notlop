@@ -35,7 +35,7 @@ $(document).ready(function(){
             }
         });
     };
-    $("#invite-box").on("keypress", function(e){
+ /*    $("#invite-box").on("keypress", function(e){
         if(e.keyCode == 13){
             e.preventDefault();
             let target = {"name": $(this).val()};
@@ -43,7 +43,7 @@ $(document).ready(function(){
             $(this).val("");
 
         }
-    });
+    }); */
     $("#invite-btn").on("click", function(e){
         e.preventDefault();
         let target = {"name": $("#invite-box").val()};

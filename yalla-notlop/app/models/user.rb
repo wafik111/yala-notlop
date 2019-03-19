@@ -9,7 +9,13 @@ class User < ApplicationRecord
   has_many :friendship_notifications, foreign_key: "to_id", dependent: :destroy
   has_friendship
   has_attached_file :avatar, styles: { medium: "300x300>", thumb: "90x90>" }, default_url: "/images/:style/missing.png"
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+  has_attached_file :profile_pic, styles: { medium: "300x300>", thumb: "90x90>" }, default_url: "/images/:style/missing.png"
+
+  #validations
+  validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/ unless Rails.env.test?
+
+  validates :name, uniqueness: true, length: { minimum: 3, maximum: 15 }
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

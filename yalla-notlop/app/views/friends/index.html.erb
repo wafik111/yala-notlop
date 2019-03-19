@@ -28,7 +28,8 @@
             </div>
             <div class="col-5 p-0">
                 <%= link_to friend.name, user_path(friend.id), class: "font-weight-bold"%><br>
-                <%= link_to  "accept", friend_path(friend.id), method: :patch, class: "btn btn-danger" %><br>
+                <%= link_to  "accept", friend_path(friend.id), method: :patch, class: "btn btn-success" %>
+                <%= link_to  "cancel", cancel_request_path(friend.id), class: "btn btn-danger" %><br>
             </div>
         </div>
     </div>

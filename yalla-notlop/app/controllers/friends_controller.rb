@@ -1,38 +1,49 @@
 class FriendsController < ApplicationController
-
+    before_action :get_user
+    before_action :get_requested_friend, except: [:index, :create]
     def index
-        @friends = current_user.friends
-        p @friends
-        @requested_friends = current_user.requested_friends
-        @pending_friends = current_user.pending_friends
+        @friends = @user.friends.order("friendships.created_at DESC")
+        @requested_friends = @user.requested_friends.order("friendships.created_at DESC")
+        @pending_friends = @user.pending_friends.order("friendships.created_at DESC")
     end
 
     def create
-        @user = current_user
         @requested_friend = User.find_by(name: params[:name])
         if @requested_friend and not @user.friends_with?(@requested_friend)
             @user.friend_request(@requested_friend)
-            @requested_friend.friendship_notifications.create(from_id: @user.id, status: :friendship_pending)
+            @requested_friend.friendship_notifications.create(from_id: @user.id, status: :unread, notification_type: :friendship_pending)
         end
         redirect_to friends_path
     end
     
+    #PUT /friends/:id
     def update
-        @user = current_user
-        @requested_friend = User.find_by(id: params[:id])
         if @requested_friend and not @user.friends_with?(@requested_friend)
             @user.accept_request(@requested_friend)
-            @requested_friend.friendship_notifications.create(from_id: @user.id, status: :friendship_accepted)
+            @requested_friend.friendship_notifications.create(from_id: @user.id, status: :unread, notification_type: :friendship_accepted)
         end
         redirect_to friends_path
     end
 
     def destroy 
-        @user = current_user
-        @requested_friend = User.find_by(id: params[:id])
         if @requested_friend and @user.friends_with?(@requested_friend)
             @user.remove_friend(@requested_friend)
         end
         redirect_to friends_path
+    end
+
+    #GET /friends/:id/cancel
+    def cancel
+        @user.decline_request(@requested_friend)
+        redirect_to friends_path
+    end
+    private
+
+    def get_user
+        @user = current_user
+    end
+
+    def get_requested_friend
+        @requested_friend = User.find_by(id: params[:id])
     end
 end

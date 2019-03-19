@@ -1,2 +1,21 @@
-<h2><%= @user.name %></h3>
-<h3><%= @user.email %></h3>
+<div class="row mb-4">
+    <div class="col-4">
+        <%= image_tag  current_user.profile_pic.url(:medium), class: "rounded ml-4" %>
+    </div>
+    <div class="col-8">
+        <h4><%= @user.name %></h4>
+        <h4><%= @user.email %></h4>
+    </div>
+</div>
+<div class="row justify-content-center mt-4">
+    <h2 class="mb-4">Orders</h2>
+    <div class="col-8 mt-4">
+            <% @user.orders.order(created_at: :desc).each do |order| %>
+                    <% unless order.cancelled? %>
+                    <div class="row mt-4">
+                        <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>     
+                    </div>
+                    <% end %>
+            <% end %>
+    </div>
+</div>

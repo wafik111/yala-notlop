@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_24_205607) do
+ActiveRecord::Schema.define(version: 2019_02_28_150826) do
 
   create_table "friendship_notifications", force: :cascade do |t|
     t.integer "from_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_205607) do
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "notification_type"
   end
 
   create_table "friendships", force: :cascade do |t|
@@ -77,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_02_24_205607) do
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "notification_type"
     t.index ["order_id"], name: "index_order_notifications_on_order_id"
   end
 

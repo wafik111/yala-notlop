@@ -4,21 +4,24 @@
         <h3>My Orders</h3>
         
             <% @orders.each do |order| %>
+                <% unless order.cancelled? %>
                 <div class="row mt-4">
-                    <% unless order.cancelled? %>
                         <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>     
-                    <% end %>
                 </div>
+                <% end %>
             <% end %>
     </div>
 
     <div class="col-6">
         <h3>Friend's Activities</h3>
         
-            <% @orders.each do |order| %>
+            <% @friends_activities.each do |order| %>
                 <div class="row mt-4">
                     <% unless order.cancelled? %>
-                        <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>     
+                    <p>
+                        <%= link_to order.name + " " + order.meal + " on " + distance_of_time_in_words(Time.now, order.ends_at) + " from " + order.resturant + " ("+order.status+")", order_path(order.id) %>
+                         by <%= link_to  "@"+order.username, user_path(order.user_id) %>   
+                    </p>  
                     <% end %>
                 </div>
             <% end %>

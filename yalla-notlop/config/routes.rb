@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "/orders/invite.json", to: "invited_members#invite"
    
   resources :friends, only: [:index, :create, :destroy, :update]
+  get "/friends/:id/cancel", to: "friends#cancel", as: "cancel_request"
   resources :orders do
     get "/joined/", to: "order_informations#index"
     post"/add/", to: "order_informations#create"
